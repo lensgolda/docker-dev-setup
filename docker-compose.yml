@@ -1,0 +1,26 @@
+version: "3.8"
+
+volumes:
+  log: {}
+
+services:
+  postgres:
+    image: postgis/postgis:9.6-2.5
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+  redis:
+    image: redis:alpine
+    ports:
+      - "127.0.0.1:6379:6379"
+  rabbit:
+    image: rabbitmq:3.8-management-alpine
+    ports:
+      - "127.0.0.1:4369:4369"
+      - "127.0.0.1:5671:5671"
+      - "127.0.0.1:15671:15671"
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
